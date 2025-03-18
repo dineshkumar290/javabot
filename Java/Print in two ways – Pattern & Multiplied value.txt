@@ -1,0 +1,29 @@
+import java.util.Scanner;
+class Main{
+    public static void main(String []args){
+        Scanner sc=new Scanner(System.in);
+        int c =sc.nextInt();
+        int d=sc.nextInt();
+        int a=Math.min(c,d);
+        int b=Math.max(c,d);
+        for(int i=a;i<=b;i++){
+            System.out.print(i+"*"+(i+1));
+            if(i!=b){
+                System.out.print(", ");
+            }
+        }
+        System.out.println();
+        for(int i=a;i<=b;i++){
+            System.out.print(i*(i+1));
+            if(i!=b){
+                System.out.print(", ");
+            }
+        }
+    }
+}
+
+Input   : 2 16
+
+Output : 2*3, 3*4, 4*5, 5*6, 6*7, 7*8, 8*9, 9*10, 10*11, 11*12, 12*13, 13*14, 14*15, 15*16, 16*17
+
+             6, 12, 20, 30, 42, 56, 72, 90, 110, 132, 156, 182, 210, 240, 272

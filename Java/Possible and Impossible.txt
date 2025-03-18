@@ -1,0 +1,63 @@
+import java.util.*;
+class Poss_imposs
+{
+public static void main(String arg[])
+{
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+int k=sc.nextInt();
+int a[]=new int[n];
+for(int i=0;i<n;i++)
+a[i]=sc.nextInt();
+int b[]=new int[n+1];
+int c[]=new int[n+1];
+  for(int i=0;i<n;i++)
+  {
+    for(int j=0;j<n;j++)
+    {
+      if(a[j]==(i+1)){
+         b[i+1]=1;
+         c[j]=1;
+         break;
+       }
+      }
+  }
+
+int flag=0;
+for(int i=1;i<n+1;i++)
+{
+if(b[i]!=1)
+{
+flag=0;
+for(int j=0;j<n;j++)
+{
+if(c[j]!=1){
+int num=a[j];
+
+while(num<i)
+{
+num=num+k;
+if(num==i){
+flag=1;
+break;
+}
+}
+}
+if(flag==1)
+break;
+}
+
+if(flag==1)
+b[i]=1;
+}
+}
+for(int i=1;i<n+1;i++)
+{
+if(b[i]!=1){
+System.out.println("Impossible");
+System.exit(0);
+}
+}
+System.out.println("Possible");
+}
+}

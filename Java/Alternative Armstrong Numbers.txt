@@ -1,0 +1,58 @@
+import java.util.Scanner;
+class Main
+{
+    private static boolean isArmstrong(int num){
+        int org=num;
+        int sum=0;
+        int digits=String.valueOf(num).length();
+        while(num>0){
+            int rem=num%10;
+            sum +=Math.pow(rem,digits);
+            num/=10;
+        }
+        return sum==org;
+    }
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        int start =sc.nextInt();
+        int end=sc.nextInt();
+        if(start==0||end==0){
+            System.out.println("Invalid Inputs");
+            return;
+        }
+        start =Math.abs(start);
+        end=Math.abs(end);
+        if(start>end){
+            int temp=start;
+            start =end;
+            end=temp;
+        }
+        boolean found=false;
+        int count=0;
+        StringBuilder result=new StringBuilder("Alternative Armstrong Numbers between the Given Values is ");
+        for(int i=start;i<=end ;i++){
+            if(isArmstrong(i)){
+                count++;
+                if(count%2==0){
+                    if(found){
+                        result.append(", ");
+                    }
+                    result.append(i);
+                    found=true;
+                }
+            }
+        }
+        if(!found){
+            System.out.println("No Armstrong Numbers BetweenGiven Values.");
+        }else{
+            System.out.println(result.toString().trim() +".");
+        }
+    }
+}
+
+
+
+
+
+
+Testcases Output:

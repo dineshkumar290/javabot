@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class RightAnglePattern {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+ 
+        int n = scanner.nextInt();
+
+        if (n == 0) {
+            System.out.println("Invalid Input");
+        } else {
+            int absN = Math.abs(n); 
+            int[] fibonacci = new int[absN];
+            fibonacci[0] = 1;
+            if (absN > 1) {
+                fibonacci[1] = 2;
+            }
+            for (int i = 2; i < absN; i++) {
+                fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+            }
+            for (int i = 1; i <= absN; i++) {
+                for (int j = 0; j < i; j++) {
+                    System.out.print(fibonacci[j] + " ");
+                }
+                System.out.println();
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+
+If Input is 6 then Print
+
+1
+
+1 2
+
+1 2 3
+
+1 2 3 5
+
+1 2 3 5 8
+
+1 2 3 5 8 13

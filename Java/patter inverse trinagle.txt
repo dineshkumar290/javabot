@@ -1,0 +1,98 @@
+import java.util.Scanner;
+class Main
+{
+	public static void main(String[]args)
+	{
+	    Scanner sc=new Scanner(System.in);
+	    int n;
+	    try{
+	        n=sc.nextInt();
+	        if(n==0){
+	            System.out.println("Invalid Input");
+	        }else{
+	            n=Math.abs(n);
+	            for(int i=0;i<n; i++){
+	                for(int j=0;j<i; j++){
+	                    System.out.print(" ");
+	                }
+	                for(int j=0;j<n-i;j++){
+	                    System.out.print("* ");
+	                }
+	                System.out.println();
+	            }
+	        }
+	    }catch(Exception e){
+	        System.out.println("Invalid Input");
+	    }
+	    sc.close();
+	}
+}
+
+#	I/P	Expected O/P	Your O/P	Status	Points
+TC 1	
+4
+* * * * 
+ * * * 
+  * * 
+   *
+* * * * 
+ * * * 
+  * * 
+   * 
+Passed	14
+TC 2	
+1
+*
+* 
+Passed	14
+TC 3	
+8
+* * * * * * * * 
+ * * * * * * * 
+  * * * * * * 
+   * * * * * 
+    * * * * 
+     * * * 
+      * * 
+       *
+* * * * * * * * 
+ * * * * * * * 
+  * * * * * * 
+   * * * * * 
+    * * * * 
+     * * * 
+      * * 
+       * 
+Passed	14
+TC 4	
+0
+Invalid Input
+Invalid Input
+Passed	14
+TC 5	
+-4
+* * * * 
+ * * * 
+  * * 
+   *
+* * * * 
+ * * * 
+  * * 
+   * 
+Passed	14
+TC 6	
+3
+* * * 
+ * * 
+  *
+* * * 
+ * * 
+  * 
+Passed	14
+TC 7	
+-2
+* * 
+ *
+* * 
+ * 
+Passed	14

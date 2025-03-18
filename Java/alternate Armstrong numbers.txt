@@ -1,0 +1,64 @@
+import java.util.*;
+
+public class AlternateArmstrongAverage {
+    
+    public static boolean isArmstrong(int num) {
+        int original = num, sum = 0, digits = String.valueOf(num).length();
+        while (num > 0) {
+            int digit = num % 10;
+            sum += Math.pow(digit, digits);
+            num /= 10;
+        }
+        return sum == original;
+    }
+    
+    public static void findAverageOfAlternateArmstrong(int start, int end) {
+        if (start == 0 || end == 0) {
+            System.out.println("Invalid Inputs.");
+            return;
+        }
+        
+        start = Math.abs(start);
+        end = Math.abs(end);
+        
+        if (start > end) {
+            int temp = start;
+            start = end;
+            end = temp;
+        }
+        
+        List<Integer> armstrongNumbers = new ArrayList<>();
+        for (int i = start; i <= end; i++) {
+            if (isArmstrong(i)) {
+                armstrongNumbers.add(i);
+            }
+        }
+        
+        if (armstrongNumbers.isEmpty()) {
+            System.out.println("No Armstrong Numbers in a Given Range.");
+            return;
+        }
+        
+        List<Integer> alternateArmstrongNumbers = new ArrayList<>();
+        for (int i = 0; i < armstrongNumbers.size(); i += 2) {
+            alternateArmstrongNumbers.add(armstrongNumbers.get(i));
+        }
+        
+        double sum = 0;
+        for (int num : alternateArmstrongNumbers) {
+            sum += num;
+        }
+        
+        double average = sum / alternateArmstrongNumbers.size();
+        System.out.printf("Average of Alternative Armstrong Numbers in the Given Range is %.2f\n", average);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int start = scanner.nextInt();
+        int end = scanner.nextInt();
+        scanner.close();
+        
+        findAverageOfAlternateArmstrong(start, end);
+    }
+}

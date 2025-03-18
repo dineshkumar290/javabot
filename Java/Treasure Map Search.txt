@@ -1,0 +1,83 @@
+import java.util.*;
+
+class TreasureHunt {
+    public static List<String> searchWord(char[][] grid, String word) {
+        List<String> results = new ArrayList<>();
+        int rows = grid.length, cols = grid[0].length;
+        int wordLen = word.length();
+        int[][] directions = {
+            {0, 1}, {1, 0}, {1, 1}, 
+            {0, -1}, {-1, 0}, {-1, -1}, 
+            {1, -1}, {-1, 1} 
+        };
+        String[] directionNames = {
+            "horizontally (left-to-right)", "vertically (top-to-bottom)", "diagonally (top-left to bottom-right)",
+            "horizontally (right-to-left)", "vertically (bottom-to-top)", "diagonally (bottom-right to top-left)",
+            "diagonally (top-right to bottom-left)", "diagonally (bottom-left to top-right)"
+        };
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                for (int d = 0; d < directions.length; d++) {
+                    int dx = directions[d][0], dy = directions[d][1];
+                    if (i + dx * (wordLen - 1) >= rows || j + dy * (wordLen - 1) >= cols ||
+                        i + dx * (wordLen - 1) < 0 || j + dy * (wordLen - 1) < 0) {
+                        continue;
+                    }
+                    
+                    int x = i, y = j;
+                    boolean found = true;
+
+                    for (int k = 0; k < wordLen; k++) {
+                        if (grid[x][y] != word.charAt(k)) {
+                            found = false;
+                            break;
+                        }
+                        x += dx;
+                        y += dy;
+                    }
+
+                    if (found) {
+                        results.add("(" + i + ", " + j + ") " + directionNames[d]);
+                    }
+                }
+            }
+        }
+        
+        return results;
+    }
+
+    public static void processGrid(List<String> lines, String word) {
+        List<char[]> tempGrid = new ArrayList<>();
+        for (String line : lines) {
+            if (line.equals("done")) break;
+            tempGrid.add(line.replace(" ", "").toCharArray());
+        }
+        char[][] grid = tempGrid.toArray(new char[0][]);
+
+        List<String> results = searchWord(grid, word);
+        if (results.isEmpty()) {
+            System.out.println("No Match");
+        } else {
+            for (String result : results) {
+                System.out.println(result);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> input = new ArrayList<>();
+        
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.equals("done")) break;
+            input.add(line);
+        }
+        
+        String word = scanner.nextLine(); // Read the search word
+        scanner.close();
+        
+        processGrid(input, word);
+    }
+}

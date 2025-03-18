@@ -1,0 +1,48 @@
+import java.util.*;
+class Islands
+{
+public static void main(String arg[])
+{
+Scanner sc=new Scanner(System.in);
+System.out.println("Enter the limits");
+int n=sc.nextInt();
+int m=sc.nextInt();
+
+int sea[][]=new int[n][m];
+ for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            System.out.println("enter "+i+" "+j+" element");
+            sea[i][j]=sc.nextInt();
+        }
+    }
+ System.out.println( find_island(sea,n,m)+"islands found");
+}
+static void explore(int sea[][],int i, int j, int row, int column)
+{
+    if (i < 0 || j < 0 || i >= row||j >= column)return;
+    if (sea[i][j] == 0)return;
+    sea[i][j]=0;
+    explore(sea,i-1, j, row, column);
+    explore(sea,i+1, j, row, column);
+    explore(sea,i, j-1, row, column);
+    explore(sea,i, j+1, row, column);    
+   explore(sea,i-1, j-1, row, column);
+    explore(sea,i-1, j+1, row, column);
+    explore(sea,i+1, j-1, row, column);
+    explore(sea,i+1, j+1, row, column);
+}
+
+static int find_island(int sea[][],int row, int column){
+    int res = 0;    
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < column; j++) {
+            if (sea[i][j] == 1) {
+                explore(sea,i, j, row, column);
+                res++;
+            }
+        }
+    }
+
+    return res;
+}    
+}

@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+class Main{
+    
+    public static void main(String[]args){
+        
+        Scanner obj = new Scanner(System.in);
+        int n1=obj.nextInt();
+        int n2=obj.nextInt();
+        if(n1==0&&n2==0){
+            System.out.println("Both Inputs are Zero");
+            return;
+        }else if(n1==0){
+            System.out.println("First Input is Zero");
+            return;
+        }else if(n2==0){
+            System.out.println("Second Input is Zero");
+            return;
+        }
+        n1=Math.abs(n1);
+        n2=Math.abs(n2);
+        if(n1>n2){
+            int temp=n1;
+            n1=n2;
+            n2=temp;
+        }
+        boolean foundOdd=false;
+        int count=0;
+        StringBuilder result=new StringBuilder();
+        for(int i=n1+1;i<n2;i++){
+            if(isOdd(i)){
+                if(count%2==0){
+                    if(result.length()>0){
+                        result.append(", ");
+                        
+                    }
+                    result.append(i);
+                    foundOdd=true;
+                }
+                count++;
+            }
+        }
+        if(foundOdd){
+            result.append(".");
+            System.out.println(result);
+        }else{
+            System.out.println("No Odd Numbers Between them");
+        }
+    }
+    static boolean isOdd(int N){
+        if(N%2!=0)
+            return true;
+        else
+            return false;
+    }
+}
+        

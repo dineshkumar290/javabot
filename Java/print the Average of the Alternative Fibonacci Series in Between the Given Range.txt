@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+class Main
+{
+    public static void main(String []args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int input1=sc.nextInt();
+        int input2=sc.nextInt();
+        if(input1<0||input2<0){
+            System.out.println("Invalid Input");
+            return;
+        }
+        int start=Math.min(input1,input2);
+        int end=Math.max(input1,input2);
+        ArrayList<Integer>fibonacci=generateFibonacci(start,end);
+        if(fibonacci.size()==0){
+            System.out.println("No Fibonacci Series values");
+            return;
+        }
+        double average=calculateAlternateAverage(fibonacci);
+        System.out.printf("%.2f%n",average);
+        sc.close();
+    }
+    private static ArrayList<Integer>generateFibonacci(int start,int end){
+        ArrayList<Integer>fibonacci=new ArrayList<>();
+        int a=0,b=1;
+        while(a<=end){
+            if(a>=start){
+                fibonacci.add(a);
+            }
+            int temp=a+b;
+            a=b;
+            b=temp;
+        }
+        return fibonacci;
+    }
+    private static double calculateAlternateAverage(ArrayList<Integer> fibonacci){
+        int sum=0,count=0;
+        for(int i=0;i<fibonacci.size();i+=2){
+            sum+=fibonacci.get(i);
+            count++;
+        }
+        return(double) sum/count;
+    }
+}

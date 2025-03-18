@@ -1,0 +1,153 @@
+import java.util.*;
+import java.io.*;
+class Tree_Sprinkle{
+
+// Function to check if a given K is sufficient to cover all trees
+static int is_valid_k(int N, int T[], int M, int S[], int K) {
+    int i = 0, j = 0; // Pointers for trees and sprinklers
+    
+    while (i < N && j < M) {
+        if (S[j] - K <= T[i] && T[i] <= S[j] + K) {
+            i++; // Tree is covered, move to the next
+        } else {
+            j++; // Try the next sprinkler
+        }
+        if (j == M && i < N) { // If sprinklers are exhausted but trees remain
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// Function to find the minimum K required
+static int find_min_k(int N, int T[], int M, int S[]) {
+    Arrays.sort(T); // Sort tree positions
+    Arrays.sort(S); // Sort sprinkler positions
+
+    int left = 0, right = Math.abs(T[0] - S[0]), mid, answer = right;
+
+    // Determine the maximum initial distance between any tree and any sprinkler
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            if (Math.abs(T[i] - S[j]) > right) {
+                right = Math.abs(T[i] - S[j]);
+            }
+        }
+    }
+
+    // Binary search for the minimum K
+    while (left <= right) {
+        mid = (left + right) / 2;
+        if (is_valid_k(N, T, M, S, mid)==1) {
+            answer = mid;
+            right = mid - 1; // Try a smaller K
+        } else {
+            left = mid + 1; // Increase K
+        }
+    }
+
+    return answer;
+}
+
+public static void main(String arg[]) {
+    int n,m;
+    Scanner sc=new Scanner(System.in);
+    System.out.printf("Enter the number of trees: ");
+    n=sc.nextInt();
+    int t[]=new int[n];
+
+    System.out.printf("Enter the positions of trees: ");
+    for (int i = 0; i < n; i++) {
+        t[i]=sc.nextInt();
+    }
+
+    System.out.printf("Enter the number of sprinklers: ");
+    m=sc.nextInt();
+    int s[]=new int[m];
+
+    System.out.printf("Enter the positions of sprinklers: ");
+    for (int i = 0; i < m; i++) {
+     s[i]=sc.nextInt();
+    }
+
+    int result = find_min_k(n,t,m,s);
+    System.out.printf("Minimum K required: %d\n", result);
+
+}
+}yjfimport java.util.*;
+import java.io.*;
+class Tree_Sprinkle{
+
+// Function to check if a given K is sufficient to cover all trees
+static int is_valid_k(int N, int T[], int M, int S[], int K) {
+    int i = 0, j = 0; // Pointers for trees and sprinklers
+    
+    while (i < N && j < M) {
+        if (S[j] - K <= T[i] && T[i] <= S[j] + K) {
+            i++; // Tree is covered, move to the next
+        } else {
+            j++; // Try the next sprinkler
+        }
+        if (j == M && i < N) { // If sprinklers are exhausted but trees remain
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// Function to find the minimum K required
+static int find_min_k(int N, int T[], int M, int S[]) {
+    Arrays.sort(T); // Sort tree positions
+    Arrays.sort(S); // Sort sprinkler positions
+
+    int left = 0, right = Math.abs(T[0] - S[0]), mid, answer = right;
+
+    // Determine the maximum initial distance between any tree and any sprinkler
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            if (Math.abs(T[i] - S[j]) > right) {
+                right = Math.abs(T[i] - S[j]);
+            }
+        }
+    }
+
+    // Binary search for the minimum K
+    while (left <= right) {
+        mid = (left + right) / 2;
+        if (is_valid_k(N, T, M, S, mid)==1) {
+            answer = mid;
+            right = mid - 1; // Try a smaller K
+        } else {
+            left = mid + 1; // Increase K
+        }
+    }
+
+    return answer;
+}
+
+public static void main(String arg[]) {
+    int n,m;
+    Scanner sc=new Scanner(System.in);
+    System.out.printf("Enter the number of trees: ");
+    n=sc.nextInt();
+    int t[]=new int[n];
+
+    System.out.printf("Enter the positions of trees: ");
+    for (int i = 0; i < n; i++) {
+        t[i]=sc.nextInt();
+    }
+
+    System.out.printf("Enter the number of sprinklers: ");
+    m=sc.nextInt();
+    int s[]=new int[m];
+
+    System.out.printf("Enter the positions of sprinklers: ");
+    for (int i = 0; i < m; i++) {
+     s[i]=sc.nextInt();
+    }
+
+    int result = find_min_k(n,t,m,s);
+    System.out.printf("Minimum K required: %d\n", result);
+
+}
+}

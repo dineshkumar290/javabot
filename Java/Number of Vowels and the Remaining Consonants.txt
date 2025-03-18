@@ -1,0 +1,25 @@
+import java.util.Scanner;
+class Main
+{
+	public static void main(String[]args)
+	{
+		Scanner sc=new Scanner(System.in);
+		String a=sc.nextLine();
+		if(!a.matches("[a-zA-Z]+")){
+		    System.out.println("Invalid Input");
+		    return;
+		}
+		String b="aeiouAEIOU";
+		int count=0;
+		StringBuilder consonants = new StringBuilder();
+		for(char ch:a.toCharArray()){
+		    if(b.indexOf(ch)!=-1){
+		        count++;
+		    } else{
+		        consonants.append(ch);
+		    }
+		}
+		System.out.println("No of Vowels : " +count);
+		System.out.println("Consonants : " +consonants.toString());
+	}
+}

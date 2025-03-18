@@ -1,0 +1,30 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        int start =sc.nextInt();
+        int end =sc.nextInt();
+        if(start>=end){
+            System.out.println("INVALID RANGE");
+            return;
+        }
+        int sum=0;
+        start++;
+        if(start%2!=0){
+            start++;
+        }
+        end--;
+        if(end%2!=0){
+            end--;
+        }
+        for(int i=start;i<=end;i+=2){
+            sum+=i;
+        }
+        if(sum==0){
+            System.out.println("NO NUMBERS");
+        }else{
+            System.out.println(sum);
+        }
+        sc.close();
+    }
+}

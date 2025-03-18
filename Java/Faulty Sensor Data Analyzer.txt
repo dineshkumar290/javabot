@@ -1,0 +1,59 @@
+import java.util.*;
+
+public class FaultySensorAnalyzer {
+    public static void findNearestTemperature(List<Double> temperatures, double query) {
+        List<Double> validReadings = new ArrayList<>();
+        Map<Double, Integer> indexMap = new HashMap<>();
+        
+        for (int i = 0; i < temperatures.size(); i++) {
+            Double temp = temperatures.get(i);
+            if (!temp.isNaN() && !indexMap.containsKey(temp)) {
+                validReadings.add(temp);
+                indexMap.put(temp, i);
+            }
+        }
+        
+        if (validReadings.isEmpty()) {
+            System.out.println("NaN\n0");
+            return;
+        }
+        
+        double nearestTemp = validReadings.get(0);
+        int nearestIndex = indexMap.get(nearestTemp);
+        double minDiff = Math.abs(nearestTemp - query);
+        
+        for (double temp : validReadings) {
+            double diff = Math.abs(temp - query);
+            if (diff < minDiff || (diff == minDiff && indexMap.get(temp) < nearestIndex)) {
+                nearestTemp = temp;
+                nearestIndex = indexMap.get(temp);
+                minDiff = diff;
+            }
+        }
+        
+        System.out.println(nearestTemp + "\n" + nearestIndex);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] tempInput = scanner.nextLine().split(" ");
+        double query = Double.parseDouble(scanner.nextLine());
+        
+        List<Double> temperatures = new ArrayList<>();
+        boolean hasValidReading = false;
+        for (String s : tempInput) {
+            if (!s.equals("NaN")) {
+                hasValidReading = true;
+            }
+            temperatures.add(s.equals("NaN") ? Double.NaN : Double.parseDouble(s));
+        }
+        
+        if (!hasValidReading) {
+            System.out.println("NaN\n0");
+        } else {
+            findNearestTemperature(temperatures, query);
+        }
+        
+        scanner.close();
+    }
+}

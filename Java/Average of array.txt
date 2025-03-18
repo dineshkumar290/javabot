@@ -1,0 +1,24 @@
+import java.util.Scanner;
+class Main
+{
+	public static void main(String[] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		int arraySize=sc.nextInt();
+		if(arraySize<=0){
+		    System.out.println("Invalid ArRay Size.");
+		    return;
+		}
+		int[] array=new int[arraySize];
+		for(int i=0;i<arraySize;i++){
+		    array[i]=sc.nextInt();
+		}
+		double sum=0;
+		for(int num:array){
+		    sum+=num;
+		}
+		double average =sum/arraySize;
+		System.out.printf("Average of Given Array Elements is " +String.format("%.5f", average) + ".");
+		sc.close();
+	}
+}

@@ -1,0 +1,21 @@
+import java.util.Scanner;
+class Main
+{
+    public static void main(String []args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int num=sc.nextInt();
+        if(num==0){
+            System.out.println("Invalid Input");
+        }else{
+            int a=String.valueOf(Math.abs(num)).length();
+            if(a==1){
+                System.out.println("Given Number consists of only 1 Digit.");
+            }else{
+                String b=(num<0)? " and it is Negative Value" : "";
+                System.out.println("Given Number consists of " +a +" Digits" + b + ".");
+            }
+        }
+        sc.close();
+    }
+}

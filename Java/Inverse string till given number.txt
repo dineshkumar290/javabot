@@ -1,0 +1,40 @@
+import java.util.Scanner;
+class Main
+{
+	public static void main(String[]args)
+	{
+		Scanner sc=new Scanner(System.in);
+		if(!sc.hasNextLine()){
+		    System.out.println("Invalid Input");
+		    return;
+		}
+		String a=sc.nextLine();
+		if(!sc.hasNextLine()){
+		    System.out.println("Invalid Input");
+		    return;
+		}
+		String numberInput=sc.nextLine();
+		if(!a.matches("[a-zA-Z]+")){
+		    System.out.println("Invalid Input");
+		    return;
+		}
+		int n;
+		try{
+		    n=Integer.parseInt(numberInput);
+		}catch(NumberFormatException e){
+		    System.out.println("Invalid Input");
+		    return;
+		}
+		if(n<=0){
+		    System.out.println("Invalid Input");
+		    return;
+		}
+		if(n>a.length()){
+		    System.out.println(a);
+		}else{
+		    String rev=new StringBuilder(a.substring(0,n)).reverse().toString();
+		    String rem=a.substring(n);
+		    System.out.println(rev+rem);
+		}
+	}
+}
